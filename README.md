@@ -6,7 +6,7 @@ Each part has its own folder, and subfolders contain exercises or apps.
 ---
 
 ## 📂 Folder Structure
-
+```
 full\_stack\_open/
 │── part0/        # Basics of web apps
 │   └── notes/
@@ -25,7 +25,7 @@ full\_stack\_open/
 │
 │── .../
 └── README.md
-
+```
 ---
 
 ## 🔄 Updating the Repository
