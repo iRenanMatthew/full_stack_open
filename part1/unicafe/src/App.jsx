@@ -19,7 +19,14 @@ const Text = (props) => {
 };
 
 const Statistics = (props) => {
-  return(
+  if (props.data.good === 0 && props.data.neutral === 0  && props.data.bad === 0 ){
+    return(
+    <>
+    <p>No feedback given</p> 
+    </>
+    )
+  } else {
+      return(
       <ul>
         <li>Good: {props.data.good}</li>
         <li>Neutral: {props.data.neutral}</li>
@@ -29,6 +36,8 @@ const Statistics = (props) => {
         <li>Positive: {getConversion(props.data, 'percent')}</li>
       </ul>
     )
+  }
+
 }
 
 const getConversion = (data, cat) => {
