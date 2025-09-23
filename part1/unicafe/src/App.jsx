@@ -24,9 +24,27 @@ const Statistics = (props) => {
         <li>Good: {props.data.good}</li>
         <li>Neutral: {props.data.neutral}</li>
         <li>Bad: {props.data.bad}</li>
+        <li>All: {getConversion(props.data, 'total')}</li>
+        <li>Average: {getConversion(props.data, 'average')}</li>
+        <li>Positive: {getConversion(props.data, 'percent')}</li>
       </ul>
     )
 }
+
+const getConversion = (data, cat) => {
+  if (cat === 'average'){
+    const avgTotal = data.good + data.neutral + data.bad;
+    if (avgTotal === 0) return 0;
+    const score = data.good*1 + data.neutral*0 + data.bad*-1;
+    return (score / avgTotal).toFixed(2);
+  } else if (cat === 'total'){
+    return data.good + data.neutral + data.bad;
+  } else {
+    const avgTotal = data.good + data.neutral + data.bad;
+    if (avgTotal === 0) return 0;
+    return (data.good / avgTotal).toFixed(2) * 100 + "%";
+  }
+};
 
 const App = () => {
   const [result, setResult] = useState(
