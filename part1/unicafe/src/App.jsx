@@ -18,6 +18,16 @@ const Text = (props) => {
   }
 };
 
+const StatisticsLine = (props) => {
+  return (
+    <tr>
+      <td>{props.text}:</td>
+      <td>{props.value}</td>
+    </tr>
+
+  )
+}
+
 const Statistics = (props) => {
   if (props.data.good === 0 && props.data.neutral === 0  && props.data.bad === 0 ){
     return(
@@ -27,14 +37,16 @@ const Statistics = (props) => {
     )
   } else {
       return(
-      <ul>
-        <li>Good: {props.data.good}</li>
-        <li>Neutral: {props.data.neutral}</li>
-        <li>Bad: {props.data.bad}</li>
-        <li>All: {getConversion(props.data, 'total')}</li>
-        <li>Average: {getConversion(props.data, 'average')}</li>
-        <li>Positive: {getConversion(props.data, 'percent')}</li>
-      </ul>
+      <table>
+        <tbody>
+          <StatisticsLine text="Good" value={props.data.good}/>
+          <StatisticsLine text="Neutral" value={props.data.neutral}/>
+          <StatisticsLine text="Bad" value={props.data.bad}/>
+          <StatisticsLine text="All" value={getConversion(props.data, 'total')}/>
+          <StatisticsLine text="Average" value={getConversion(props.data, 'average')}/>
+          <StatisticsLine text="Positive" value={getConversion(props.data, 'percent')}/>
+        </tbody>
+      </table>
     )
   }
 
