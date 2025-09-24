@@ -59,7 +59,7 @@ const getConversion = (data, cat) => {
     const score = data.good*1 + data.neutral*0 + data.bad*-1;
     return (score / avgTotal).toFixed(2);
   } else if (cat === 'total'){
-    return data.good + data.neutral + data.bad;
+    return Object.values(data).reduce((sum, total) => sum + total, 0); 
   } else {
     const avgTotal = data.good + data.neutral + data.bad;
     if (avgTotal === 0) return 0;
