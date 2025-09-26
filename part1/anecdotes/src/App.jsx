@@ -20,18 +20,49 @@ const App = () => {
   const [votes, setVotes] = useState(Array(anecdotes.length).fill(0));
 
   const handleVote = () => {
-    const copy = [...votes];
-    copy[selected] += 1;
-    setVotes(copy);
+    setVotes(prevData => {
+      const newData = [...prevData];
+      newData[selected] += 1;
+      return newData;
+    });
   };
 
+  const getMostVotes = () => {
+    const copy = [...votes]
+    copy.sort((a,b) => b - a);
+    return copy[0];
+  }
+
+  const getMostVotesAndTie = () => {
+    const maxVotes = Math.max(...votes);
+    return [...votes]
+            .map((item,idx) => item === maxVotes ? idx : -1)
+            .filter((item) => item !== -1);
+  }
+
   return (
+    <>
     <div>
+      <h1>Anecdote of the day</h1>
       {anecdotes[selected]}
       <p>has {votes[selected]} votes</p>
       <button onClick={handleVote}>Vote</button>
       <button onClick={() => setSelected(getRandom())}>Random</button>
     </div>
+    <div>
+      <h2>Anecdote with most votes</h2>
+      {anecdotes[votes.indexOf(getMostVotes())]}
+    </div>
+    <div>
+      <h2>Anecdote with most votes with Tie</h2>
+      {getMostVotesAndTie().map(item => (
+        <div key={item}>
+          {anecdotes[item]} <br />
+          has {votes[item]} votes
+        </div>
+      ))}
+    </div>
+    </>
   );
 };
 
