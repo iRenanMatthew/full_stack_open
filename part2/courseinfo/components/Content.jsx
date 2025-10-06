@@ -1,11 +1,15 @@
+import Header from "./Header";
 import Part from "./Parts";
+import Total from "./Total";
 
-const Content = ({ parts }) => {
+const Content = ({ course }) => {
   return (
     <>
-      {parts.map((part) => (
+    <Header title={course.name}/>
+      {course.parts.map((part) => (
         <Part key={part.id} part={part} />
       ))}
+    <Total parts={course.parts}/>
     </>
   );
 };
