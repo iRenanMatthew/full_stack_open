@@ -1,7 +1,7 @@
-const App = ({ notes }) => {
+const App = ({ notes, isLoading }) => {
   return (
     <>
-      {notes.length > 0 ? (
+      {isLoading ? <p>Loading...</p> :(notes.length > 0 ? (
         notes.map((person, idx) => (
           <p key={idx}>
             {person.name} {person.number}
@@ -9,7 +9,7 @@ const App = ({ notes }) => {
         ))
       ) : (
         <p>No records to be found</p>
-      )}
+      ))}
     </>
   );
 };
